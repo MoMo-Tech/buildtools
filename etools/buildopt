@@ -1,0 +1,244 @@
+SHELL := /bin/sh
+
+# <!-- START OF GENERATED VARIABLES
+CSRCS := \
+../appl/userinterface/main.c \
+../cfg/hal_conf/stm32f7xx_it.c \
+../cfg/os_helper/_write.c \
+../sc/bsw/cmsis/system_stm32f7xx.c \
+../sc/bsw/cortexm/_initialize_hardware.c \
+../sc/bsw/cortexm/_reset_hardware.c \
+../sc/bsw/cortexm/exception_handlers.c \
+../sc/bsw/diag/Trace.c \
+../sc/bsw/diag/trace_impl.c \
+../sc/bsw/newlib/_exit.c \
+../sc/bsw/newlib/_sbrk.c \
+../sc/bsw/newlib/_startup.c \
+../sc/bsw/newlib/_syscalls.c \
+../sc/bsw/newlib/assert.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_adc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_adc_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_can.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_cec.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_cortex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_crc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_crc_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_cryp.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_cryp_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dac.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dac_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dcmi.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dcmi_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dma.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dma2d.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_dma_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_eth.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_flash.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_flash_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_gpio.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_hash.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_hash_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_hcd.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_i2c.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_i2c_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_i2s.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_irda.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_iwdg.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_lptim.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_ltdc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_msp_template.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_nand.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_nor.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_pcd.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_pcd_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_pwr.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_pwr_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_qspi.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_rcc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_rcc_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_rng.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_rtc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_rtc_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_sai.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_sai_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_sd.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_sdram.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_smartcard.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_smartcard_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_spdifrx.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_spi.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_sram.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_tim.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_tim_ex.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_uart.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_usart.c \
+../sc/bsw/stm32f7xx/stm32f7xx_hal_wwdg.c \
+../sc/bsw/stm32f7xx/stm32f7xx_ll_fmc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_ll_sdmmc.c \
+../sc/bsw/stm32f7xx/stm32f7xx_ll_usb.c \
+../sc/ssw/bsp/stm32746g_discovery.c \
+../sc/ssw/bsp/stm32746g_discovery_audio.c \
+../sc/ssw/bsp/stm32746g_discovery_camera.c \
+../sc/ssw/bsp/stm32746g_discovery_eeprom.c \
+../sc/ssw/bsp/stm32746g_discovery_lcd.c \
+../sc/ssw/bsp/stm32746g_discovery_qspi.c \
+../sc/ssw/bsp/stm32746g_discovery_sd.c \
+../sc/ssw/bsp/stm32746g_discovery_sdram.c \
+../sc/ssw/bsp/stm32746g_discovery_ts.c \
+../sc/ssw/components/exc7200/exc7200.c \
+../sc/ssw/components/ft5336/ft5336.c \
+../sc/ssw/components/mfxstm32l152/mfxstm32l152.c \
+../sc/ssw/components/ov9655/ov9655.c \
+../sc/ssw/components/s5k5cag/s5k5cag.c \
+../sc/ssw/components/stmpe811/stmpe811.c \
+../sc/ssw/components/ts3510/ts3510.c \
+../sc/ssw/components/wm8994/wm8994.c
+
+CXXSRCS := \
+../sc/bsw/newlib/_cxx.cpp
+
+SSRCS := \
+../sc/bsw/cmsis/startup_stm32f746xx.S
+
+LDSCRIPTS := \
+../sc/ldscripts/libs.ld \
+../sc/ldscripts/mem.ld \
+../sc/ldscripts/sections.ld
+
+INCDIRS := \
+.. \
+../cfg \
+../cfg/hal_conf \
+../sc \
+../sc/bsw \
+../sc/bsw/arm \
+../sc/bsw/cmsis \
+../sc/bsw/cortexm \
+../sc/bsw/diag \
+../sc/bsw/stm32f7xx \
+../sc/bsw/stm32f7xx/Legacy \
+../sc/ssw \
+../sc/ssw/bsp \
+../sc/ssw/components \
+../sc/ssw/components/Common \
+../sc/ssw/components/ampire480272 \
+../sc/ssw/components/ampire640480 \
+../sc/ssw/components/exc7200 \
+../sc/ssw/components/ft5336 \
+../sc/ssw/components/mfxstm32l152 \
+../sc/ssw/components/n25q128a \
+../sc/ssw/components/n25q512a \
+../sc/ssw/components/ov9655 \
+../sc/ssw/components/rk043fn48h \
+../sc/ssw/components/s5k5cag \
+../sc/ssw/components/stmpe811 \
+../sc/ssw/components/ts3510 \
+../sc/ssw/components/wm8994 \
+../utilities \
+../utilities/CPU \
+../utilities/Fonts \
+../utilities/Log
+
+CDIRS := \
+../appl/userinterface \
+../cfg/hal_conf \
+../cfg/os_helper \
+../sc/bsw/cmsis \
+../sc/bsw/cortexm \
+../sc/bsw/diag \
+../sc/bsw/newlib \
+../sc/bsw/stm32f7xx \
+../sc/ssw/bsp \
+../sc/ssw/components/exc7200 \
+../sc/ssw/components/ft5336 \
+../sc/ssw/components/mfxstm32l152 \
+../sc/ssw/components/ov9655 \
+../sc/ssw/components/s5k5cag \
+../sc/ssw/components/stmpe811 \
+../sc/ssw/components/ts3510 \
+../sc/ssw/components/wm8994 \
+../utilities/CPU \
+../utilities/Fonts \
+../utilities/Log
+
+CXXDIRS := \
+../sc/bsw/newlib
+
+SDIRS := \
+../sc/bsw/cmsis
+
+USERLIBS :=
+USEROBJS :=
+# <!-- END OF GENERATED VARIABLES
+
+# Project relevant defines
+PROJNAME := stm32f7-disco
+
+PROJEXEC := 
+PROJMAP := 
+
+PROJDEF := -DDEBUG -DTRACE -DSTM32F746xx
+
+CFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -Wall -g3 \
+ 		   -fmessage-length=0 -fsigned-char \
+ 		   -ffunction-sections -fdata-sections \
+ 		   -ffreestanding -fno-move-loop-invariants \
+		   -std=gnu11 \
+		   $(PROJDEF) 
+CXXFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 \
+		     -fmessage-length=0 -fsigned-char \
+		     -ffunction-sections -fdata-sections \
+		     -ffreestanding -fno-move-loop-invariants \
+			 -std=gnu++11 -fabi-version=0 \
+			 $(PROJDEF) 
+
+ASFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 -x assembler-with-cpp \
+		   -fmessage-length=0 -fsigned-char \
+		   -ffunction-sections -fdata-sections \
+		   -ffreestanding -fno-move-loop-invariants  \
+		   $(PROJDEF)
+ 
+LDFLAGS = -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 -nostartfiles -Xlinker --gc-sections --specs=nano.specs \
+		    -fmessage-length=0 -fsigned-char \
+		    -ffunction-sections -fdata-sections \
+		    -ffreestanding -fno-move-loop-invariants \
+		    $(LDLIST) \
+		    -Wl,-Map,$(shell echo -n "$(abspath $(OUTDIR)/$(PROJNAME).map)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
+		    -o $(shell echo -n "$(abspath $(OUTDIR)/$(PROJNAME).elf)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
+		    $(shell echo -n "$(abspath $(OBJDIR)/*.o)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
+		    $(shell echo -n "$(abspath $(USEROBJS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
+		    $(shell echo -n "$(abspath $(USERLIBS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+
+CPFLAGS = 
+FPFLAGS = 
+
+ODFLAGS := -S
+
+CPPFLAGS =
+
+INCLIST := $(foreach dir, $(abspath $(INCDIRS)), $(shell echo -n "-I$(dir)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -))
+LDLIST := $(foreach script, $(abspath $(LDSCRIPTS)), $(shell echo -n "-T$(script)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -))
+
+# General path defines
+ROOTDIR := $(abspath ..)
+OUTDIR := $(ROOTDIR)/out
+OBJDIR := $(ROOTDIR)/obj
+TMPDIR := $(ROOTDIR)/tmp
+
+ABSOBJDIR := $(shell echo -n "$(abspath $(OBJDIR))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+ABSOUTDIR := $(shell echo -n "$(abspath $(OUTDIR))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+
+ABSASMSRCS := $(shell echo -n "$(abspath $(SSRCS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+ABSCSRCS := $(shell echo -n "$(abspath $(CSRCS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+ABSCXXSRCS := $(shell echo -n "$(abspath $(CXXSRCS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+
+# Define the compiler/tools variables here
+CC := arm-none-eabi-gcc 
+CXX := arm-none-eabi-g++ 
+LD := arm-none-eabi-gcc 
+AS := arm-none-eabi-gcc 
+OD := arm-none-eabi-objdump 
+CP := arm-none-eabi-objcopy 
+FP := 
+SZ := arm-none-eabi-size 
