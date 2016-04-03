@@ -1,224 +1,223 @@
 SHELL := /bin/sh
 
+CHIBIOS := ../sc/ChibiOS
 # <!-- START OF GENERATED VARIABLES
 CSRCS := \
-../appl/userinterface/main.c \
-../cfg/hal_conf/stm32f7xx_it.c \
-../cfg/os_helper/_write.c \
-../sc/bsw/cmsis/system_stm32f7xx.c \
-../sc/bsw/cortexm/_initialize_hardware.c \
-../sc/bsw/cortexm/_reset_hardware.c \
-../sc/bsw/cortexm/exception_handlers.c \
-../sc/bsw/diag/Trace.c \
-../sc/bsw/diag/trace_impl.c \
-../sc/bsw/newlib/_exit.c \
-../sc/bsw/newlib/_sbrk.c \
-../sc/bsw/newlib/_startup.c \
-../sc/bsw/newlib/_syscalls.c \
-../sc/bsw/newlib/assert.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_adc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_adc_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_can.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_cec.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_cortex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_crc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_crc_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_cryp.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_cryp_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dac.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dac_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dcmi.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dcmi_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dma.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dma2d.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_dma_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_eth.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_flash.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_flash_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_gpio.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_hash.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_hash_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_hcd.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_i2c.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_i2c_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_i2s.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_irda.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_iwdg.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_lptim.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_ltdc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_msp_template.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_nand.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_nor.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_pcd.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_pcd_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_pwr.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_pwr_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_qspi.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_rcc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_rcc_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_rng.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_rtc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_rtc_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_sai.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_sai_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_sd.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_sdram.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_smartcard.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_smartcard_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_spdifrx.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_spi.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_sram.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_tim.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_tim_ex.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_uart.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_usart.c \
-../sc/bsw/stm32f7xx/stm32f7xx_hal_wwdg.c \
-../sc/bsw/stm32f7xx/stm32f7xx_ll_fmc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_ll_sdmmc.c \
-../sc/bsw/stm32f7xx/stm32f7xx_ll_usb.c \
-../sc/ssw/bsp/stm32746g_discovery.c \
-../sc/ssw/bsp/stm32746g_discovery_audio.c \
-../sc/ssw/bsp/stm32746g_discovery_camera.c \
-../sc/ssw/bsp/stm32746g_discovery_eeprom.c \
-../sc/ssw/bsp/stm32746g_discovery_lcd.c \
-../sc/ssw/bsp/stm32746g_discovery_qspi.c \
-../sc/ssw/bsp/stm32746g_discovery_sd.c \
-../sc/ssw/bsp/stm32746g_discovery_sdram.c \
-../sc/ssw/bsp/stm32746g_discovery_ts.c \
-../sc/ssw/components/exc7200/exc7200.c \
-../sc/ssw/components/ft5336/ft5336.c \
-../sc/ssw/components/mfxstm32l152/mfxstm32l152.c \
-../sc/ssw/components/ov9655/ov9655.c \
-../sc/ssw/components/s5k5cag/s5k5cag.c \
-../sc/ssw/components/stmpe811/stmpe811.c \
-../sc/ssw/components/ts3510/ts3510.c \
-../sc/ssw/components/wm8994/wm8994.c
+$(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt1.c \
+$(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/vectors.c \
+$(CHIBIOS)/os/hal/src/hal.c \
+$(CHIBIOS)/os/hal/src/hal_buffers.c \
+$(CHIBIOS)/os/hal/src/hal_queues.c \
+$(CHIBIOS)/os/hal/src/hal_mmcsd.c \
+$(CHIBIOS)/os/hal/src/adc.c \
+$(CHIBIOS)/os/hal/src/can.c \
+$(CHIBIOS)/os/hal/src/dac.c \
+$(CHIBIOS)/os/hal/src/ext.c \
+$(CHIBIOS)/os/hal/src/gpt.c \
+$(CHIBIOS)/os/hal/src/i2c.c \
+$(CHIBIOS)/os/hal/src/i2s.c \
+$(CHIBIOS)/os/hal/src/icu.c \
+$(CHIBIOS)/os/hal/src/mac.c \
+$(CHIBIOS)/os/hal/src/mmc_spi.c \
+$(CHIBIOS)/os/hal/src/pal.c \
+$(CHIBIOS)/os/hal/src/pwm.c \
+$(CHIBIOS)/os/hal/src/rtc.c \
+$(CHIBIOS)/os/hal/src/sdc.c \
+$(CHIBIOS)/os/hal/src/serial.c \
+$(CHIBIOS)/os/hal/src/serial_usb.c \
+$(CHIBIOS)/os/hal/src/spi.c \
+$(CHIBIOS)/os/hal/src/st.c \
+$(CHIBIOS)/os/hal/src/uart.c \
+$(CHIBIOS)/os/hal/src/usb.c \
+$(CHIBIOS)/os/hal/src/wdg.c \
+$(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/hal_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/ext_lld_isr.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3/adc_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/can_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/dac_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1/stm32_dma.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1/ext_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2/pal_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2/i2c_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2/rtc_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2/spi_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/gpt_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/icu_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/pwm_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/st_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/serial_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/uart_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1/usb_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1/wdg_lld.c \
+${CHIBIOS}/os/hal/boards/ST_NUCLEO_F302R8/board.c \
+${CHIBIOS}/os/hal/osal/rt/osal.c \
+$(CHIBIOS)/os/rt/src/chsys.c \
+$(CHIBIOS)/os/rt/src/chdebug.c \
+$(CHIBIOS)/os/rt/src/chvt.c \
+$(CHIBIOS)/os/rt/src/chschd.c \
+$(CHIBIOS)/os/rt/src/chthreads.c \
+$(CHIBIOS)/os/rt/src/chtm.c \
+$(CHIBIOS)/os/rt/src/chstats.c \
+$(CHIBIOS)/os/rt/src/chregistry.c \
+$(CHIBIOS)/os/rt/src/chsem.c \
+$(CHIBIOS)/os/rt/src/chmtx.c \
+$(CHIBIOS)/os/rt/src/chcond.c \
+$(CHIBIOS)/os/rt/src/chevents.c \
+$(CHIBIOS)/os/rt/src/chmsg.c \
+$(CHIBIOS)/os/rt/src/chdynamic.c \
+$(CHIBIOS)/os/common/oslib/src/chmboxes.c \
+$(CHIBIOS)/os/common/oslib/src/chmemcore.c \
+$(CHIBIOS)/os/common/oslib/src/chheap.c \
+$(CHIBIOS)/os/common/oslib/src/chmempools.c \
+$(CHIBIOS)/os/common/ports/ARMCMx/chcore.c \
+$(CHIBIOS)/os/common/ports/ARMCMx/chcore_v7m.c \
+${CHIBIOS}/test/rt/test.c \
+${CHIBIOS}/test/rt/testthd.c \
+${CHIBIOS}/test/rt/testsem.c \
+${CHIBIOS}/test/rt/testmtx.c \
+${CHIBIOS}/test/rt/testmsg.c \
+${CHIBIOS}/test/rt/testmbox.c \
+${CHIBIOS}/test/rt/testevt.c \
+${CHIBIOS}/test/rt/testheap.c \
+${CHIBIOS}/test/rt/testpools.c \
+${CHIBIOS}/test/rt/testdyn.c \
+${CHIBIOS}/test/rt/testsys.c \
+${CHIBIOS}/test/rt/testbmk.c \
+../appl/userinterface/main.c
 
-CXXSRCS := \
-../sc/bsw/newlib/_cxx.cpp
+CXXSRCS := 
 
 SSRCS := \
-../sc/bsw/cmsis/startup_stm32f746xx.S
+$(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S \
+$(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/chcoreasm_v7m.S
 
 LDSCRIPTS := \
-../sc/ldscripts/libs.ld \
-../sc/ldscripts/mem.ld \
-../sc/ldscripts/sections.ld
+../sc/linker/STM32F303xE.ld
 
 INCDIRS := \
-.. \
+$(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC \
+$(CHIBIOS)/os/common/startup/ARMCMx/devices/STM32F3xx \
+$(CHIBIOS)/os/common/ext/CMSIS/include \
+$(CHIBIOS)/os/common/ext/CMSIS/ST/STM32F3xx \
+$(CHIBIOS)/os/hal/include \
+$(CHIBIOS)/os/hal/ports/common/ARMCMx \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1 \
+${CHIBIOS}/os/hal/boards/ST_NUCLEO_F302R8 \
+${CHIBIOS}/os/hal/osal/rt \
+$(CHIBIOS)/os/rt/include \
+$(CHIBIOS)/os/common/oslib/include \
+$(CHIBIOS)/os/common/ports/ARMCMx \
+$(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC \
+${CHIBIOS}/test/rt \
+$(CHIBIOS)/os/various \
+$(CHIBIOS)/test/rt \
+../cfg/hal \
+../cfg/os \
 ../cfg \
-../cfg/hal_conf \
-../sc \
-../sc/bsw \
-../sc/bsw/arm \
-../sc/bsw/cmsis \
-../sc/bsw/cortexm \
-../sc/bsw/diag \
-../sc/bsw/stm32f7xx \
-../sc/bsw/stm32f7xx/Legacy \
-../sc/ssw \
-../sc/ssw/bsp \
-../sc/ssw/components \
-../sc/ssw/components/Common \
-../sc/ssw/components/ampire480272 \
-../sc/ssw/components/ampire640480 \
-../sc/ssw/components/exc7200 \
-../sc/ssw/components/ft5336 \
-../sc/ssw/components/mfxstm32l152 \
-../sc/ssw/components/n25q128a \
-../sc/ssw/components/n25q512a \
-../sc/ssw/components/ov9655 \
-../sc/ssw/components/rk043fn48h \
-../sc/ssw/components/s5k5cag \
-../sc/ssw/components/stmpe811 \
-../sc/ssw/components/ts3510 \
-../sc/ssw/components/wm8994 \
-../utilities \
-../utilities/CPU \
-../utilities/Fonts \
-../utilities/Log
+../appl \
+../appl/userinterface
 
-CDIRS := \
-../appl/userinterface \
-../cfg/hal_conf \
-../cfg/os_helper \
-../sc/bsw/cmsis \
-../sc/bsw/cortexm \
-../sc/bsw/diag \
-../sc/bsw/newlib \
-../sc/bsw/stm32f7xx \
-../sc/ssw/bsp \
-../sc/ssw/components/exc7200 \
-../sc/ssw/components/ft5336 \
-../sc/ssw/components/mfxstm32l152 \
-../sc/ssw/components/ov9655 \
-../sc/ssw/components/s5k5cag \
-../sc/ssw/components/stmpe811 \
-../sc/ssw/components/ts3510 \
-../sc/ssw/components/wm8994 \
-../utilities/CPU \
-../utilities/Fonts \
-../utilities/Log
+CDIRS := 
 
-CXXDIRS := \
-../sc/bsw/newlib
+CXXDIRS := 
 
-SDIRS := \
-../sc/bsw/cmsis
+SDIRS := 
 
 USERLIBS :=
 USEROBJS :=
 # <!-- END OF GENERATED VARIABLES
 
 # Project relevant defines
-PROJNAME := stm32f7-disco
+MCU := cortex-m4
+PROJNAME := stm32f302R8-nucleo
 
 PROJEXEC := 
 PROJMAP := 
 
-PROJDEF := -DDEBUG -DTRACE -DSTM32F746xx
+PROJDEF := -DDEBUG -DTRACE
 
-CFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -Wall -g3 \
+# Enables the use of FPU (no, softfp, hard).
+USE_FPU := hard
+
+ifeq ($(USE_FPU),)
+  USE_FPU = no
+endif
+
+ifneq ($(USE_FPU),no)
+  FPU_OPT := -mfloat-abi=$(USE_FPU) -mfpu=fpv4-sp-d16 -fsingle-precision-constant
+  PROJDEF += -DCORTEX_USE_FPU=TRUE
+else
+  FPU_OPT :=
+  PROJDEF += -DCORTEX_USE_FPU=FALSE
+endif
+
+GENERAL_OPT := -O2 -ggdb -fomit-frame-pointer -falign-functions=16
+
+CFLAGS := -c -mcpu=$(MCU) -mthumb -Wextra -Wall \
+           $(GENERAL_OPT) \
  		   -fmessage-length=0 -fsigned-char \
- 		   -ffunction-sections -fdata-sections \
+ 		   -ffunction-sections -fdata-sections -fno-common \
  		   -ffreestanding -fno-move-loop-invariants \
 		   -std=gnu11 \
-		   $(PROJDEF) 
-CXXFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 \
+		   $(PROJDEF) \
+		   $(FPU_OPT)
+CXXFLAGS := -c -mcpu=$(MCU) -mthumb -Wextra \
+             $(GENERAL_OPT) \
 		     -fmessage-length=0 -fsigned-char \
-		     -ffunction-sections -fdata-sections \
-		     -ffreestanding -fno-move-loop-invariants \
+		     -ffunction-sections -fdata-sections -fno-common \
+		     -ffreestanding -fno-move-loop-invariants -fno-rtti \
 			 -std=gnu++11 -fabi-version=0 \
-			 $(PROJDEF) 
+			 $(PROJDEF) \
+			 $(FPU_OPT)
 
-ASFLAGS := -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 -x assembler-with-cpp \
+ASFLAGS := -c -mcpu=$(MCU) -mthumb -Wextra -x assembler-with-cpp \
+		   $(GENERAL_OPT) \
 		   -fmessage-length=0 -fsigned-char \
-		   -ffunction-sections -fdata-sections \
+		   -ffunction-sections -fdata-sections -fno-common \
 		   -ffreestanding -fno-move-loop-invariants  \
-		   $(PROJDEF)
+		   $(PROJDEF) \
+		   $(FPU_OPT)
  
-LDFLAGS = -mcpu=cortex-m7 -mthumb -Og -Wextra -g3 -nostartfiles -Xlinker --gc-sections --specs=nano.specs \
+LDFLAGS = -mcpu=$(MCU) -mthumb -Wextra -nostartfiles -Xlinker --gc-sections --specs=nano.specs \
+		    $(GENERAL_OPT) \
 		    -fmessage-length=0 -fsigned-char \
-		    -ffunction-sections -fdata-sections \
-		    -ffreestanding -fno-move-loop-invariants \
+		    -ffunction-sections -fdata-sections -fno-common \
+		    -ffreestanding -fno-move-loop-invariants -flto \
+		    $(LDDIRS) \
 		    $(LDLIST) \
-		    -Wl,-Map,$(shell echo -n "$(abspath $(OUTDIR)/$(PROJNAME).map)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
+		    $(FPU_OPT) \
+		    -Wl,-Map,$(shell echo -n "$(abspath $(OUTDIR)/$(PROJNAME).map)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -),--defsym=__main_stack_size__=0x400,--defsym=__process_stack_size__=0x400 \
 		    -o $(shell echo -n "$(abspath $(OUTDIR)/$(PROJNAME).elf)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
 		    $(shell echo -n "$(abspath $(OBJDIR)/*.o)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
 		    $(shell echo -n "$(abspath $(USEROBJS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) \
 		    $(shell echo -n "$(abspath $(USERLIBS))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
 
+CPPFLAGS =
+
 CPFLAGS = 
 FPFLAGS = 
 
-ODFLAGS := -S
+ODFLAGS := -S -x --syms
 
-CPPFLAGS =
+RELINCLIST := $(foreach dir, $(INCDIRS), $(shell echo -n "-I$(dir)"))
 
 INCLIST := $(foreach dir, $(abspath $(INCDIRS)), $(shell echo -n "-I$(dir)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -))
 LDLIST := $(foreach script, $(abspath $(LDSCRIPTS)), $(shell echo -n "-T$(script)" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -))
+LDDIRS := $(foreach script, $(abspath $(LDSCRIPTS)), $(shell echo -n "-L$(dir $(script))" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -))
 
 # General path defines
 ROOTDIR := $(abspath ..)
@@ -242,3 +241,5 @@ OD := arm-none-eabi-objdump
 CP := arm-none-eabi-objcopy 
 FP := 
 SZ := arm-none-eabi-size 
+
+USE_ECLIPSE := yes
