@@ -57,9 +57,28 @@ link:
 	@echo
 	@echo -n Linking files ...
 	@echo Linker command line: $(LD) $(LDFLAGS) > $(TMPDIR)/linker.log
-	@$(LD) $(LDFLAGS) &>> $(TMPDIR)/linker.log
-	@bash -c 'if grep -q "warning" $(TMPDIR)/linker.log; then mv $(TMPDIR)/linker.log $(TMPDIR)/linker.warn; fi'
-	@echo -e " [\033[1;32mFINISHED\033[0m]"
+	@echo >> $(TMPDIR)/linker.log
+	@echo >> $(TMPDIR)/linker.log
+	@bash -c 'if ! $(LD) $(LDFLAGS) &>> $(TMPDIR)/linker.log; then \
+		mv $(TMPDIR)/linker.log $(TMPDIR)/linker.error; \
+		echo -e " [\033[1;31mERROR\033[0m]"; \
+		echo ""; \
+		echo -e "\033[1;31m__________________________ $$(notdir $1) __________________________\033[0m"; \
+		echo "" >> $(TMPDIR)/linker.error; \
+		if [ -f $(TMPDIR)/linker.err ]; then \
+			cat $(TMPDIR)/linker.err >> $(TMPDIR)/linker.error; \
+		fi; \
+		rm -f $(TMPDIR)/linker.err; \
+		cat $(TMPDIR)/linker.error; \
+		echo ""; \
+		exit 2; \
+	elif grep -q "warning" $(TMPDIR)/linker.log; then \
+		mv $(TMPDIR)/linker.log $(TMPDIR)/linker.warn; \
+		echo -e " [\033[1;33mWARNING\033[0m]"; \
+	else \
+		echo -e " [\033[1;32mFINISHED\033[0m]"; \
+	fi; \
+	exit' || (exit 2)
 
 disasm: $(OUTDIR)/$(PROJNAME).elf
 	@echo
