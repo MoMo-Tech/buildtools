@@ -33,12 +33,20 @@ src_to_obj:
 	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cjobs c_src_to_obj
 	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cxxjobs cxx_src_to_obj
 	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/asmjobs s_src_to_obj
-	
+
 summary:
 	@echo
 	@echo -e "\033[1;34m___________________________________________________________________\033[0m"
 	@echo -e "\033[1;34m__________________________ Build summary __________________________\033[0m"
 	@echo -e "\033[1;34m___________________________________________________________________\033[0m"
+	@echo
+	@echo -e "\033[1;34m______________________ Generic build commands _____________________\033[0m"
+	@echo
+	@echo $(AS) $(ASFLAGS) $(CPPFLAGS) $(INCLIST) dummy_s.S -o dummy_s.o
+	@echo $(CC) $(CFLAGS) $(CPPFLAGS) $(INCLIST) dummy_c.c -o dummy_c.o
+	@echo $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) dummy_cpp.cpp -o dummy_cpp.o
+	@echo
+	@echo -e "\033[1;34m______________________ Warnings/Errors/Infos ______________________\033[0m"
 	@echo
 
 	@find $(TMPDIR) -iname "*.warn" -exec \
