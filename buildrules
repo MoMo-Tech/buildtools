@@ -42,9 +42,9 @@ summary:
 	@echo
 	@echo -e "\033[1;34m______________________ Generic build commands _____________________\033[0m"
 	@echo
-	@echo $(AS) $(ASFLAGS) $(CPPFLAGS) $(INCLIST) dummy_s.S -o dummy_s.o
-	@echo $(CC) $(CFLAGS) $(CPPFLAGS) $(INCLIST) dummy_c.c -o dummy_c.o
-	@echo $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) dummy_cpp.cpp -o dummy_cpp.o
+	@echo $(AS) $(ASFLAGS) $(CPPFLAGS) $(INCLIST) main.s -o main.o
+	@echo $(CC) $(CFLAGS) $(CPPFLAGS) $(RELINCLIST) main.c -o main.o
+	@echo $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) main.cpp -o main.o
 	@echo
 	@echo -e "\033[1;34m______________________ Warnings/Errors/Infos ______________________\033[0m"
 	@echo
