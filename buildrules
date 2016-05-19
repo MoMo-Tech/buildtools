@@ -2,7 +2,16 @@ SHELL := /bin/sh
 
 CURRENT_DIR := $(shell pwd)
 
-export CURRENT_DIR
+empty :=
+space := $(empty) $(empty)
+filter_vals := : ..
+STRIP_CYGDRIVE = $(subst /cygdrive/,$(empty),$1)
+SPLIT_CYGPATH = $(subst /,$(space),$(STRIP_CYGDRIVE))
+REPLACE_DRIVE = $(patsubst $(firstword $(SPLIT_CYGPATH)),$(addsuffix :,$(firstword $(SPLIT_CYGPATH))),$(SPLIT_CYGPATH))
+RECONSTRUCT_PATH = $(subst $(space),/,$(REPLACE_DRIVE))
+WIN_PATH = $(if $(filter-out $(filter_vals),$1),$(RECONSTRUCT_PATH),$1)
+
+export CURRENT_DIR WIN_PATH
 
 -include $(BUILD_OPT)
 
@@ -25,7 +34,7 @@ all: rebuild
 
 rebuild: build_start project_setup clean_obj_out build
 
-build: build_start project_setup clean_tmp src_to_obj link disasm elf_to_bin elf_to_hex summary
+build: build_start project_setup clean_tmp src_to_obj link disasm elf_to_bin elf_to_hex elf_to_srec summary
 
 clean: clean_obj_out clean_tmp
 
@@ -62,7 +71,7 @@ summary:
 
 link:
 	@echo
-	@echo -n Linking files ...
+	@echo -n Generating executable $(PROJNAME).elf ...
 	@echo Linker command line: $(LD) $(LDFLAGS) > $(TMPDIR)/linker.log
 	@echo >> $(TMPDIR)/linker.log
 	@echo >> $(TMPDIR)/linker.log
@@ -87,20 +96,25 @@ link:
 	fi; \
 	exit' || (exit 2)
 
-disasm: $(OUTDIR)/$(PROJNAME).elf
-	@echo
-	@echo -n Disassembling source ...
-	@$(OD) $(ODFLAGS) $(shell echo -n "$(OUTDIR)/$(PROJNAME).elf" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) > $(shell echo -n "$(OUTDIR)/$(PROJNAME).lst" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+disasm: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo 	
+	@echo -n Generating listing from $(PROJNAME).elf ...
+	@$(OD) $(ODFLAGS) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) > $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).lst))
 	@echo -e " [\033[1;32mFINISHED\033[0m]"
 
-elf_to_bin: $(OUTDIR)/$(PROJNAME).elf
+elf_to_bin: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
 	@echo -n Creating binary $(PROJNAME).bin ...
-	@$(CP) -Obinary $(shell echo -n "$(OUTDIR)/$(PROJNAME).elf" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) $(shell echo -n "$(OUTDIR)/$(PROJNAME).bin" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+	@$(CP) -Obinary $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).bin))
 	@echo -e " [\033[1;32mFINISHED\033[0m]"
 
-elf_to_hex: $(OUTDIR)/$(PROJNAME).elf
+elf_to_hex: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
 	@echo -n Creating hex $(PROJNAME).hex ...
-	@$(CP) -Oihex $(shell echo -n "$(OUTDIR)/$(PROJNAME).elf" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -) $(shell echo -n "$(OUTDIR)/$(PROJNAME).hex" | sed -e "s/\/cygdrive\/\(.\)/\1:/g" -)
+	@$(CP) -Oihex $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).hex))
+	@echo -e " [\033[1;32mFINISHED\033[0m]"
+
+elf_to_srec: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo -n Creating hex $(PROJNAME).s19 ...
+	@$(CP) -Osrec $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).s19))
 	@echo -e " [\033[1;32mFINISHED\033[0m]"
 
 filling: $(OUTDIR)/$(PROJNAME).s19
