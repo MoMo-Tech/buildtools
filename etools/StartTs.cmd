@@ -4,11 +4,10 @@ setlocal ENABLEDELAYEDEXPANSION
 
 set OLDPATH=%PATH%
 REM Update the sysenvvar PATH with the paths to the tools that you are going to use (e.g. compiler, cygwin, additional tools)
-set PATH=c:/prehd/tsmirr/cygwin/CygWin_2.4.1_64Bit/bin;^
-c:/prehd/tsmirr/compiler/GCC_ARM_none_20151219/bin;^
+set PATH=<PATH_TO_TOOLSET_HERE>
 %PATH%
 
-set TS_MIRR=c:/prehd/tsmirr
+set TS_MIRR=<PATH_TO_BUILDTOOLS_HERE>
 
 set TARGET=%2
 set NO_OF_JOBS=%1

@@ -1,6 +1,8 @@
 SHELL := /bin/sh
 
-CURRENT_DIR := $(shell pwd)
+ifeq ($(strip $(USE_ECLIPSE)),)
+USE_ECLIPSE := no
+endif
 
 empty :=
 space := $(empty) $(empty)
@@ -11,20 +13,24 @@ REPLACE_DRIVE = $(patsubst $(firstword $(SPLIT_CYGPATH)),$(addsuffix :,$(firstwo
 RECONSTRUCT_PATH = $(subst $(space),/,$(REPLACE_DRIVE))
 WIN_PATH = $(if $(filter-out $(filter_vals),$1),$(RECONSTRUCT_PATH),$1)
 
-export CURRENT_DIR WIN_PATH
-
 -include $(BUILD_OPT)
+
+RELINCLIST := $(addprefix -I, $(INCDIRS))
+
+INCLIST := $(addprefix -I,$(foreach dir,$(abspath $(INCDIRS)),$(call WIN_PATH,$(dir))))
+LDLIST := $(addprefix -T,$(foreach script,$(abspath $(LDSCRIPTS)),$(call WIN_PATH,$(script))))
+LDDIRS := $(addprefix -L,$(foreach script,$(abspath $(LDSCRIPTS)),$(call WIN_PATH,$(dir $(script)))))
 
 START_TIMESTAMP := $(shell date +%s)
 
 # Common variables
-export INCLIST LDLIST TMPDIR OBJDIR NO_OF_JOBS TARGET CPPFLAGS ABSOBJDIR ABSOUTDIR
+export INCLIST LDLIST LDDIRS TMPDIR OBJDIR OUTDIR CPPFLAGS
 # S compilation variables
-export CC CFLAGS CSRCS ABSCSRCS
+export CC CFLAGS CSRCS
 # C compilation variables
-export AS ASFLAGS SSRCS ABSASMSRCS
+export AS ASFLAGS SSRCS
 # CPP compilation variables
-export CXX CXXFLAGS CXXSRCS ABSCXXSRCS
+export CXX CXXFLAGS CXXSRCS
 
 # Continue from here
 .PHONY: all build rebuild link disasm filling $(START_TIMESTAMP)
@@ -38,25 +44,36 @@ build: build_start project_setup clean_tmp src_to_obj link disasm elf_to_bin elf
 
 clean: clean_obj_out clean_tmp
 
-src_to_obj:		
-	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cjobs c_src_to_obj
-	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cxxjobs cxx_src_to_obj
-	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/asmjobs s_src_to_obj
+src_to_obj:	
 
-summary:
+	@set > ENV_VAR_2.log
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/asmjobs s_src_to_obj
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cjobs c_src_to_obj
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cxxjobs cxx_src_to_obj	
+
+summary: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
 	@echo
 	@echo -e "\033[1;34m___________________________________________________________________\033[0m"
 	@echo -e "\033[1;34m__________________________ Build summary __________________________\033[0m"
 	@echo -e "\033[1;34m___________________________________________________________________\033[0m"
 	@echo
+	@echo -e "\033[1;34m_____________________________ ELF info ____________________________\033[0m"
+	@$(SZ) -B -x $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo
+	@echo -e "\033[1;34m_________________ _____ ELF info (detailed) _______________________\033[0m"
+	@$(SZ) -A -x $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo
+ifeq ($(strip $(USE_ECLIPSE)),yes)
 	@echo -e "\033[1;34m______________________ Generic build commands _____________________\033[0m"
 	@echo
-	@echo $(AS) $(ASFLAGS) $(CPPFLAGS) $(INCLIST) main.s -o main.o
-	@echo $(CC) $(CFLAGS) $(CPPFLAGS) $(RELINCLIST) main.c -o main.o
-	@echo $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) main.cpp -o main.o
+	@echo as $(ASFLAGS) $(CPPFLAGS) $(INCLIST) main.s -o main.o
+	@echo gcc $(CFLAGS) $(CPPFLAGS) $(RELINCLIST) main.c -o main.o
+	@echo g++ $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) main.cpp -o main.o
+endif
 	@echo
 	@echo -e "\033[1;34m______________________ Warnings/Errors/Infos ______________________\033[0m"
 	@echo
+	@set > $(TMPDIR)/ENV_Vars.log
 	@find $(TMPDIR) -iname "*.warn" -exec \
 		bash -c \
 		'filepath="{}"; \

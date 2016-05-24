@@ -9,51 +9,48 @@ $(CHIBIOS)/os/hal/src/hal.c \
 $(CHIBIOS)/os/hal/src/hal_buffers.c \
 $(CHIBIOS)/os/hal/src/hal_queues.c \
 $(CHIBIOS)/os/hal/src/hal_mmcsd.c \
-$(CHIBIOS)/os/hal/src/hal_adc.c \
-$(CHIBIOS)/os/hal/src/hal_can.c \
-$(CHIBIOS)/os/hal/src/hal_dac.c \
-$(CHIBIOS)/os/hal/src/hal_ext.c \
-$(CHIBIOS)/os/hal/src/hal_gpt.c \
-$(CHIBIOS)/os/hal/src/hal_i2c.c \
-$(CHIBIOS)/os/hal/src/hal_i2s.c \
-$(CHIBIOS)/os/hal/src/hal_icu.c \
-$(CHIBIOS)/os/hal/src/hal_mac.c \
-$(CHIBIOS)/os/hal/src/hal_mmc_spi.c \
-$(CHIBIOS)/os/hal/src/hal_pal.c \
-$(CHIBIOS)/os/hal/src/hal_pwm.c \
-$(CHIBIOS)/os/hal/src/hal_qspi.c \
-$(CHIBIOS)/os/hal/src/hal_rtc.c \
-$(CHIBIOS)/os/hal/src/hal_sdc.c \
-$(CHIBIOS)/os/hal/src/hal_serial.c \
-$(CHIBIOS)/os/hal/src/hal_serial_usb.c \
-$(CHIBIOS)/os/hal/src/hal_spi.c \
-$(CHIBIOS)/os/hal/src/hal_st.c \
-$(CHIBIOS)/os/hal/src/hal_uart.c \
-$(CHIBIOS)/os/hal/src/hal_usb.c \
-$(CHIBIOS)/os/hal/src/hal_wdg.c \
+$(CHIBIOS)/os/hal/src/adc.c \
+$(CHIBIOS)/os/hal/src/can.c \
+$(CHIBIOS)/os/hal/src/dac.c \
+$(CHIBIOS)/os/hal/src/ext.c \
+$(CHIBIOS)/os/hal/src/gpt.c \
+$(CHIBIOS)/os/hal/src/i2c.c \
+$(CHIBIOS)/os/hal/src/i2s.c \
+$(CHIBIOS)/os/hal/src/icu.c \
+$(CHIBIOS)/os/hal/src/mac.c \
+$(CHIBIOS)/os/hal/src/mmc_spi.c \
+$(CHIBIOS)/os/hal/src/pal.c \
+$(CHIBIOS)/os/hal/src/pwm.c \
+$(CHIBIOS)/os/hal/src/rtc.c \
+$(CHIBIOS)/os/hal/src/sdc.c \
+$(CHIBIOS)/os/hal/src/serial.c \
+$(CHIBIOS)/os/hal/src/serial_usb.c \
+$(CHIBIOS)/os/hal/src/spi.c \
+$(CHIBIOS)/os/hal/src/st.c \
+$(CHIBIOS)/os/hal/src/uart.c \
+$(CHIBIOS)/os/hal/src/usb.c \
+$(CHIBIOS)/os/hal/src/wdg.c \
 $(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F7xx/hal_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F7xx/hal_ext_lld_isr.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv2/hal_adc_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/hal_can_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1/hal_ext_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/hal_dac_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv2/stm32_dma.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2/hal_pal_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2/hal_i2c_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/MACv1/hal_mac_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/OTGv1/hal_usb_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2/hal_rtc_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SDMMCv1/hal_sdc_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2/hal_i2s_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2/hal_spi_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_gpt_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_icu_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/hal_serial_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/hal_uart_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1/hal_wdg_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/hal_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/ext_lld_isr.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3/adc_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/can_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/dac_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1/stm32_dma.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1/ext_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2/pal_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2/i2c_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2/rtc_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2/spi_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/gpt_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/icu_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/pwm_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/st_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/serial_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/uart_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1/usb_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1/wdg_lld.c \
+${CHIBIOS}/os/hal/boards/ST_NUCLEO_F302R8/board.c \
 ${CHIBIOS}/os/hal/osal/rt/osal.c \
 $(CHIBIOS)/os/rt/src/chsys.c \
 $(CHIBIOS)/os/rt/src/chdebug.c \
@@ -75,21 +72,18 @@ $(CHIBIOS)/os/common/oslib/src/chheap.c \
 $(CHIBIOS)/os/common/oslib/src/chmempools.c \
 $(CHIBIOS)/os/common/ports/ARMCMx/chcore.c \
 $(CHIBIOS)/os/common/ports/ARMCMx/chcore_v7m.c \
-${CHIBIOS}/test/lib/ch_test.c \
-${CHIBIOS}/test/rt/source/test/test_root.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_001.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_002.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_003.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_004.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_005.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_006.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_007.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_008.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_009.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_010.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_011.c \
-${CHIBIOS}/test/rt/source/test/test_sequence_012.c \
-../cfg/board/board.c \
+${CHIBIOS}/test/rt/test.c \
+${CHIBIOS}/test/rt/testthd.c \
+${CHIBIOS}/test/rt/testsem.c \
+${CHIBIOS}/test/rt/testmtx.c \
+${CHIBIOS}/test/rt/testmsg.c \
+${CHIBIOS}/test/rt/testmbox.c \
+${CHIBIOS}/test/rt/testevt.c \
+${CHIBIOS}/test/rt/testheap.c \
+${CHIBIOS}/test/rt/testpools.c \
+${CHIBIOS}/test/rt/testdyn.c \
+${CHIBIOS}/test/rt/testsys.c \
+${CHIBIOS}/test/rt/testbmk.c \
 ../appl/userinterface/main.c
 
 CXXSRCS := 
@@ -99,31 +93,30 @@ $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S \
 $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/chcoreasm_v7m.S
 
 LDSCRIPTS := \
-../sc/linker/STM32F746xG_MAX.ld
+../sc/linker/STM32F303xE.ld
 
 INCDIRS := \
 $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC \
-$(CHIBIOS)/os/common/startup/ARMCMx/devices/STM32F7xx \
+$(CHIBIOS)/os/common/startup/ARMCMx/devices/STM32F3xx \
 $(CHIBIOS)/os/common/ext/CMSIS/include \
-$(CHIBIOS)/os/common/ext/CMSIS/ST/STM32F7xx \
+$(CHIBIOS)/os/common/ext/CMSIS/ST/STM32F3xx \
 $(CHIBIOS)/os/hal/include \
 $(CHIBIOS)/os/hal/ports/common/ARMCMx \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F7xx \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv2 \
+$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/MACv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/OTGv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SDMMCv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1 \
+${CHIBIOS}/os/hal/boards/ST_NUCLEO_F302R8 \
 ${CHIBIOS}/os/hal/osal/rt \
 $(CHIBIOS)/os/rt/include \
 $(CHIBIOS)/os/common/oslib/include \
@@ -131,16 +124,12 @@ $(CHIBIOS)/os/common/ports/ARMCMx \
 $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC \
 ${CHIBIOS}/test/rt \
 $(CHIBIOS)/os/various \
-${CHIBIOS}/test/lib \
-${CHIBIOS}/test/rt/source/test \
-${CHIBIOS}/os/license \
+$(CHIBIOS)/test/rt \
 ../cfg/hal \
 ../cfg/os \
-../cfg/board \
 ../cfg \
 ../appl \
-../appl/userinterface \
-../appl/misc
+../appl/userinterface
 
 CDIRS := 
 
@@ -153,13 +142,13 @@ USEROBJS :=
 # <!-- END OF GENERATED VARIABLES
 
 # Project relevant defines
-MCU := cortex-m7
-PROJNAME := stm32f746ng-discovery
+MCU := cortex-m4
+PROJNAME := stm32f302R8-nucleo
 
 PROJEXEC := 
 PROJMAP := 
 
-PROJDEF := -DTHUMB_PRESENT -DTHUMB_NO_ITERWORKING -mno-thumb-interwork
+PROJDEF := -DDEBUG -DTRACE
 
 # Enables the use of FPU (no, softfp, hard).
 USE_FPU := hard
@@ -169,7 +158,7 @@ ifeq ($(USE_FPU),)
 endif
 
 ifneq ($(USE_FPU),no)
-  FPU_OPT := -mfloat-abi=$(USE_FPU) -mfpu=fpv5-sp-d16 -fsingle-precision-constant
+  FPU_OPT := -mfloat-abi=$(USE_FPU) -mfpu=fpv4-sp-d16 -fsingle-precision-constant
   PROJDEF += -DCORTEX_USE_FPU=TRUE
 else
   FPU_OPT :=
@@ -182,7 +171,7 @@ CFLAGS := -c -mcpu=$(MCU) -mthumb -Wextra -Wall \
            $(GENERAL_OPT) \
  		   -fmessage-length=0 -fsigned-char \
  		   -ffunction-sections -fdata-sections -fno-common \
- 		   -ffreestanding -fno-move-loop-invariants -flto \
+ 		   -ffreestanding -fno-move-loop-invariants \
 		   -std=gnu11 \
 		   $(PROJDEF) \
 		   $(FPU_OPT)
@@ -199,10 +188,10 @@ ASFLAGS := -c -mcpu=$(MCU) -mthumb -Wextra -x assembler-with-cpp \
 		   $(GENERAL_OPT) \
 		   -fmessage-length=0 -fsigned-char \
 		   -ffunction-sections -fdata-sections -fno-common \
-		   -ffreestanding -fno-move-loop-invariants -flto \
+		   -ffreestanding -fno-move-loop-invariants  \
 		   $(PROJDEF) \
 		   $(FPU_OPT)
-
+ 
 LDFLAGS = -mcpu=$(MCU) -mthumb -Wextra -nostartfiles -Xlinker --gc-sections --specs=nano.specs \
 		    $(GENERAL_OPT) \
 		    -fmessage-length=0 -fsigned-char \
@@ -211,11 +200,11 @@ LDFLAGS = -mcpu=$(MCU) -mthumb -Wextra -nostartfiles -Xlinker --gc-sections --sp
 		    $(LDDIRS) \
 		    $(LDLIST) \
 		    $(FPU_OPT) \
-		    -Wl,-Map,$(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).map)),--defsym=__main_stack_size__=0x400,--defsym=__process_stack_size__=0x400 \
-		    -o $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) \
-		    $(addsuffix /*.o, $(call WIN_PATH,$(abspath $(OBJDIR)))) \
-		    $(foreach userobj, $(abspath $(USEROBJS)), $(call WIN_PATH,$(userobj))) \
-		    $(foreach userlib, $(abspath $(USERLIBS)), $(call WIN_PATH,$(userlib)))
+		    -Wl,-Map,$(subst /cygdrive/*/, *:/, $(abspath $(OUTDIR)/$(PROJNAME).map)),--defsym=__main_stack_size__=0x400,--defsym=__process_stack_size__=0x400 \
+		    -o $(subst /cygdrive/*/, *:/, $(abspath $(OUTDIR)/$(PROJNAME).elf)) \
+		    $(subst /cygdrive/*/, *:/, $(abspath $(OBJDIR)/*.o)) \
+		    $(subst /cygdrive/*/, *:/, $(abspath $(USEROBJS))) \
+		    $(subst /cygdrive/*/, *:/, $(abspath $(USERLIBS)))
 
 CPPFLAGS =
 
@@ -224,11 +213,11 @@ FPFLAGS =
 
 ODFLAGS := -S -x --syms
 
-RELINCLIST := $(addprefix -I, $(INCDIRS))
+RELINCLIST := $(foreach dir, $(INCDIRS), $(shell echo -n "-I$(dir)"))
 
-INCLIST := $(addprefix -I, $(foreach dir, $(abspath $(INCDIRS)), $(call WIN_PATH,$(dir))))
-LDLIST := $(addprefix -T, $(foreach script, $(abspath $(LDSCRIPTS)), $(call WIN_PATH,$(script))))
-LDDIRS := $(addprefix -L, $(foreach script, $(abspath $(LDSCRIPTS)), $(call WIN_PATH,$(dir $(script)))))
+INCLIST := $(foreach dir, $(abspath $(INCDIRS)), $(subst /cygdrive/*/, *:/, -I$(dir))
+LDLIST := $(foreach script, $(abspath $(LDSCRIPTS)), $(subst /cygdrive/*/, *:/, -T$(script))
+LDDIRS := $(foreach script, $(abspath $(LDSCRIPTS)), $(subst /cygdrive/*/, *:/, -L$(dir $(script)))
 
 # General path defines
 ROOTDIR := $(abspath ..)
@@ -236,12 +225,12 @@ OUTDIR := $(ROOTDIR)/out
 OBJDIR := $(ROOTDIR)/obj
 TMPDIR := $(ROOTDIR)/tmp
 
-ABSOBJDIR := $(call WIN_PATH,$(abspath $(OBJDIR)))
-ABSOUTDIR := $(call WIN_PATH,$(abspath $(OUTDIR)))
+ABSOBJDIR := $(subst /cygdrive/*/, *:/, $(abspath $(OBJDIR)))
+ABSOUTDIR := $(subst /cygdrive/*/, *:/, $(abspath $(OUTDIR)))
 
-ABSASMSRCS := $(foreach src, $(abspath $(SSRCS)), $(call WIN_PATH,$(src)))
-ABSCSRCS := $(foreach src, $(abspath $(CSRCS)), $(call WIN_PATH,$(src)))
-ABSCXXSRCS := $(foreach src, $(abspath $(CXXSRCS)), $(call WIN_PATH,$(src)))
+ABSASMSRCS := $(subst /cygdrive/*/, *:/, $(abspath $(SSRCS)))
+ABSCSRCS := $(subst /cygdrive/*/, *:/, $(abspath $(CSRCS)))
+ABSCXXSRCS := $(subst /cygdrive/*/, *:/, $(abspath $(CXXSRCS)))
 
 # Define the compiler/tools variables here
 CC := arm-none-eabi-gcc 

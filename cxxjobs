@@ -1,5 +1,19 @@
 SHELL := /bin/sh
 
+empty :=
+space := $(empty) $(empty)
+filter_vals := : ..
+STRIP_CYGDRIVE = $(subst /cygdrive/,$(empty),$1)
+SPLIT_CYGPATH = $(subst /,$(space),$(STRIP_CYGDRIVE))
+REPLACE_DRIVE = $(patsubst $(firstword $(SPLIT_CYGPATH)),$(addsuffix :,$(firstword $(SPLIT_CYGPATH))),$(SPLIT_CYGPATH))
+RECONSTRUCT_PATH = $(subst $(space),/,$(REPLACE_DRIVE))
+WIN_PATH = $(if $(filter-out $(filter_vals),$1),$(RECONSTRUCT_PATH),$1)
+
+ABSOBJDIR = $(call WIN_PATH,$(abspath $(OBJDIR)))
+ABSOUTDIR = $(call WIN_PATH,$(abspath $(OUTDIR)))
+
+ABSCXXSRCS = $(foreach src,$(abspath $(CXXSRCS)),$(call WIN_PATH,$(src)))
+
 define make_cpp_to_o
 $2: $1 $3
 	@echo -n Compiling $(notdir $1) ...
