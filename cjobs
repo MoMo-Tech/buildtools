@@ -22,9 +22,9 @@ $2: $1 $3
 	@echo >> $$(TMPDIR)/$$(notdir $1).log
 	@bash -c 'if ! $$(CC) $$(CFLAGS) $$(CPPFLAGS) $$(DEPFLAGS) $$(INCLIST) $1 -o $2 &>> $$(TMPDIR)/$$(notdir $1).log; then \
 		mv $$(TMPDIR)/$$(notdir $1).log $$(TMPDIR)/$$(notdir $1).error; \
-		echo -e " [\033[1;31mERROR\033[0m]"; \
+		echo -e " $(ERROR_VAR)"; \
 		echo ""; \
-		echo -e "\033[1;31m__________________________ $$(notdir $1) __________________________\033[0m"; \
+		echo -e "$(COLOR4_VAR_START)__________________________ $$(notdir $1) __________________________$(COLOR1_VAR_END)"; \
 		echo "" >> $$(TMPDIR)/$$(notdir $1).error; \
 		if [ -f $$(TMPDIR)/$$(basename $$(notdir $1)).err ]; then \
 			cat $$(TMPDIR)/$$(basename $$(notdir $1)).err >> $$(TMPDIR)/$$(notdir $1).error; \
@@ -35,9 +35,9 @@ $2: $1 $3
 		exit 2; \
 	elif grep -q "warning" $$(TMPDIR)/$$(notdir $1).log; then \
 		mv $$(TMPDIR)/$$(notdir $1).log $$(TMPDIR)/$$(notdir $1).warn; \
-		echo -e " [\033[1;33mWARNING\033[0m]"; \
+		echo -e " $(WARNING_VAR)"; \
 	else \
-		echo -e " [\033[1;32mFINISHED\033[0m]"; \
+		echo -e " $(FINISHED_VAR)"; \
 	fi; \
 	exit' || (exit 2)
 	@$$(POSTCOMPILE)
