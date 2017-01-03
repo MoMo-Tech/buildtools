@@ -1,0 +1,191 @@
+SHELL := /bin/sh
+
+empty :=
+space := $(empty) $(empty)
+filter_vals := : ..
+STRIP_CYGDRIVE = $(subst /cygdrive/,$(empty),$1)
+SPLIT_CYGPATH = $(subst /,$(space),$(STRIP_CYGDRIVE))
+REPLACE_DRIVE = $(patsubst $(firstword $(SPLIT_CYGPATH)),$(addsuffix :,$(firstword $(SPLIT_CYGPATH))),$(SPLIT_CYGPATH))
+RECONSTRUCT_PATH = $(subst $(space),/,$(REPLACE_DRIVE))
+WIN_PATH = $(if $(filter-out $(filter_vals),$1),$(RECONSTRUCT_PATH),$1)
+
+-include $(BUILD_OPT)
+
+ifeq ($(strip $(USE_ECLIPSE)),)
+USE_ECLIPSE := no
+endif
+
+ifeq ($(strip $(USE_PRETTY_PRINT)),)
+USE_PRETTY_PRINT := no
+endif
+
+ifeq ($(strip $(USE_PRETTY_PRINT)),yes)
+FINISHED_VAR := [\033[1;32mFinished\033[0m]
+WARNING_VAR := [\033[1;33mWarning\033[0m]
+ERROR_VAR := [\033[1;31mError\033[0m]
+COLOR1_VAR_START := \033[1;34m
+COLOR2_VAR_START := \033[1;33m
+COLOR3_VAR_START := \033[1;36m
+COLOR4_VAR_START := \033[1;31m
+COLOR1_VAR_END := \033[0m
+else
+FINISHED_VAR := [Finished]
+WARNING_VAR := [Warning]
+ERROR_VAR := [Error]
+COLOR1_VAR_START :=
+COLOR2_VAR_START :=
+COLOR3_VAR_START :=
+COLOR4_VAR_START :=
+COLOR1_VAR_END :=
+endif
+
+RELINCLIST := $(addprefix -I, $(INCDIRS))
+
+INCLIST := $(addprefix -I,$(foreach dir,$(abspath $(INCDIRS)),$(call WIN_PATH,$(dir))))
+LDLIST := $(addprefix -T,$(foreach script,$(abspath $(LDSCRIPTS)),$(call WIN_PATH,$(script))))
+LDDIRS := $(addprefix -L,$(foreach script,$(abspath $(LDSCRIPTS)),$(call WIN_PATH,$(dir $(script)))))
+
+START_TIMESTAMP := $(shell date +%s)
+
+# Common variables
+export INCLIST LDLIST LDDIRS TMPDIR OBJDIR OUTDIR CPPFLAGS 
+export USE_ECLIPSE USE_PRETTY_PRINT FINISHED_VAR WARNING_VAR ERROR_VAR
+export COLOR1_VAR_START COLOR2_VAR_START COLOR3_VAR_START COLOR4_VAR_START COLOR1_VAR_END
+# S compilation variables
+export CC CFLAGS CSRCS
+# C compilation variables
+export AS ASFLAGS SSRCS
+# CPP compilation variables
+export CXX CXXFLAGS CXXSRCS
+
+# Continue from here
+.PHONY: all build rebuild link disasm filling $(START_TIMESTAMP)
+.SILENT:
+
+all: rebuild
+
+rebuild: build_start project_setup clean_obj_out build
+
+build: build_start project_setup clean_tmp src_to_obj link disasm elf_to_bin elf_to_hex elf_to_srec summary
+
+clean: clean_obj_out clean_tmp
+
+src_to_obj:	
+
+	@set > ENV_VAR_2.log
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/asmjobs s_src_to_obj
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cjobs c_src_to_obj
+	@$(MAKE) -S $(NO_OF_JOBS) -Otarget -f $(TS_PATH)/cxxjobs cxx_src_to_obj	
+
+summary: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo
+	@echo -e "$(COLOR1_VAR_START)___________________________________________________________________$(COLOR1_VAR_END)"
+	@echo -e "$(COLOR1_VAR_START)__________________________ Build summary __________________________$(COLOR1_VAR_END)"
+	@echo -e "$(COLOR1_VAR_START)___________________________________________________________________$(COLOR1_VAR_END)"
+	@echo
+	@echo -e "$(COLOR1_VAR_START)_____________________________ ELF info ____________________________$(COLOR1_VAR_END)"
+	@$(SZ) -B -x $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo
+	@echo -e "$(COLOR1_VAR_START)_________________ _____ ELF info (detailed) _______________________$(COLOR1_VAR_END)"
+	@$(SZ) -A -x $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo
+ifeq ($(strip $(USE_ECLIPSE)),yes)
+	@echo -e "$(COLOR1_VAR_START)______________________ Generic build commands _____________________$(COLOR1_VAR_END)"
+	@echo
+	@echo as $(ASFLAGS) $(CPPFLAGS) $(INCLIST) main.s -o main.o
+	@echo gcc $(CFLAGS) $(CPPFLAGS) $(RELINCLIST) main.c -o main.o
+	@echo g++ $(CXXFLAGS) $(CPPFLAGS) $(INCLIST) main.cpp -o main.o
+endif
+	@echo
+	@echo -e "$(COLOR1_VAR_START)______________________ Warnings/Errors/Infos ______________________$(COLOR1_VAR_END)"
+	@echo
+	@set > $(TMPDIR)/ENV_Vars.log
+	@find $(TMPDIR) -iname "*.warn" -exec \
+		bash -c \
+		'filepath="{}"; \
+	     echo -e "$(COLOR2_VAR_START)__________________________ $$(basename $$filepath .warn) __________________________$(COLOR1_VAR_END)"; \
+		 cat {}; \
+		 echo "";' \;
+
+	@echo -e "$(COLOR1_VAR_START)___________________________________________________________________$(COLOR1_VAR_END)"
+	@echo -e "$(COLOR1_VAR_START)The build process took: $(COLOR1_VAR_END)$(COLOR3_VAR_START)$(shell expr $(shell date +%s) - $(START_TIMESTAMP)) sec$(COLOR1_VAR_END)$(COLOR1_VAR_START) on [$(shell date +%c)] with $(COLOR1_VAR_END)$(COLOR3_VAR_START)$(subst -j,,$(NO_OF_JOBS))$(COLOR1_VAR_END)$(COLOR1_VAR_START) job(s)$(COLOR1_VAR_END)"
+	@echo
+	@echo
+
+link:
+	@echo
+	@echo -n Generating executable $(PROJNAME).elf ...
+	@echo Linker command line: $(LD) $(LDFLAGS) > $(TMPDIR)/linker.log
+	@echo >> $(TMPDIR)/linker.log
+	@echo >> $(TMPDIR)/linker.log
+	@bash -c 'if ! $(LD) $(LDFLAGS) &>> $(TMPDIR)/linker.log; then \
+		mv $(TMPDIR)/linker.log $(TMPDIR)/linker.error; \
+		echo -e " $(ERROR_VAR)"; \
+		echo ""; \
+		echo -e "$(COLOR4_VAR_START)__________________________ $$(notdir $1) __________________________$(COLOR1_VAR_END)"; \
+		echo "" >> $(TMPDIR)/linker.error; \
+		if [ -f $(TMPDIR)/linker.err ]; then \
+			cat $(TMPDIR)/linker.err >> $(TMPDIR)/linker.error; \
+		fi; \
+		rm -f $(TMPDIR)/linker.err; \
+		cat $(TMPDIR)/linker.error; \
+		echo ""; \
+		exit 2; \
+	elif grep -q "warning" $(TMPDIR)/linker.log; then \
+		mv $(TMPDIR)/linker.log $(TMPDIR)/linker.warn; \
+		echo -e " $(WARNING_VAR)"; \
+	else \
+		echo -e " $(FINISHED_VAR)"; \
+	fi; \
+	exit' || (exit 2)
+
+disasm: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo 	
+	@echo -n Generating listing from $(PROJNAME).elf ...
+	@$(OD) $(ODFLAGS) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) > $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).lst))
+	@echo -e " $(FINISHED_VAR)"
+
+elf_to_bin: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo -n Creating binary $(PROJNAME).bin ...
+	@$(CP) -Obinary $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).bin))
+	@echo -e " $(FINISHED_VAR)"
+
+elf_to_hex: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo -n Creating hex $(PROJNAME).hex ...
+	@$(CP) -Oihex $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).hex))
+	@echo -e " $(FINISHED_VAR)"
+
+elf_to_srec: $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf))
+	@echo -n Creating hex $(PROJNAME).s19 ...
+	@$(CP) -Osrec $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).elf)) $(call WIN_PATH,$(abspath $(OUTDIR)/$(PROJNAME).s19))
+	@echo -e " $(FINISHED_VAR)"
+
+filling: $(OUTDIR)/$(PROJNAME).s19
+	@echo -n Running filling for $(PROJNAME).s19 ...
+	@cp $(OUTDIR)/$(PROJNAME).s19 $(OUTDIR)/$(PROJNAME).sx
+	@$(FP) $(FPFLAGS) > $(TMPDIR)/filling.log
+	@mv $(OUTDIR)/$(PROJNAME).sx $(OUTDIR)/$(PROJNAME)_Unfilled.s19
+	@echo -e " $(FINISHED_VAR)"
+
+clean_obj_out:
+	@echo -n INFO :- Cleaning the /obj and /out directory ...
+	@rm -f $(OBJDIR)/*
+	@rm -f $(OUTDIR)/*
+	@echo -e " $(FINISHED_VAR)"
+
+clean_tmp:
+	@echo -n INFO :- Cleaning the /tmp directory ...
+	@rm -f $(TMPDIR)/*
+	@echo -e " $(FINISHED_VAR)"
+	@echo
+
+project_setup:
+	@echo -n INFO :- Checking directory structure ...
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OUTDIR)
+	@mkdir -p $(TMPDIR)
+	@echo -e " $(FINISHED_VAR)"
+
+build_start: 
+	@echo -e "$(COLOR1_VAR_START)___________________________________________________________________$(COLOR1_VAR_END)"
+	@echo -e "$(COLOR1_VAR_START)Build process started on [$(shell date +%c)]$(COLOR1_VAR_END)\n"
