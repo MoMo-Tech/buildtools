@@ -122,7 +122,7 @@ link:
 		mv $(TMPDIR)/linker.log $(TMPDIR)/linker.error; \
 		echo -e " $(ERROR_VAR)"; \
 		echo ""; \
-		echo -e "$(COLOR4_VAR_START)__________________________ $$(notdir $1) __________________________$(COLOR1_VAR_END)"; \
+		echo -e "$(COLOR4_VAR_START)__________________________ link __________________________$(COLOR1_VAR_END)"; \
 		echo "" >> $(TMPDIR)/linker.error; \
 		if [ -f $(TMPDIR)/linker.err ]; then \
 			cat $(TMPDIR)/linker.err >> $(TMPDIR)/linker.error; \

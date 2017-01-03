@@ -4,10 +4,9 @@ setlocal ENABLEDELAYEDEXPANSION
 
 set OLDPATH=%PATH%
 REM Update the sysenvvar PATH with the paths to the tools that you are going to use (e.g. compiler, cygwin, additional tools)
-set PATH=<PATH_TO_TOOLSET_HERE>
-%PATH%
+set PATH=d:\DSUsers\uidt6501\apps\cygwin\bin;d:\DSUsers\uidt6501\apps\gcc-arm-none-eabi-20160926\bin;%PATH%
 
-set TS_MIRR=<PATH_TO_BUILDTOOLS_HERE>
+set TS_MIRR=%CD%\jobs
 
 set TARGET=%2
 set NO_OF_JOBS=%1
@@ -33,7 +32,7 @@ if "%TARGET%"=="" (
 	)
 )
 
-make TS_PATH=%TS_MIRR%/buildtools BUILD_OPT=%CD%/buildopt NO_OF_JOBS=%NO_OF_JOBS% TARGET=%TARGET% %TARGET% -f %TS_MIRR%/buildtools/buildrules
+make TS_PATH=%TS_MIRR% BUILD_OPT=%CD%/buildopt NO_OF_JOBS=%NO_OF_JOBS% TARGET=%TARGET% %TARGET% -f %TS_MIRR%/buildrules
 
 set PATH=%OLDPATH%
 endlocal
