@@ -18,48 +18,17 @@ $(CHIBIOS)/os/hal/src/hal.c \
 $(CHIBIOS)/os/hal/src/hal_buffers.c \
 $(CHIBIOS)/os/hal/src/hal_queues.c \
 $(CHIBIOS)/os/hal/src/hal_mmcsd.c \
-$(CHIBIOS)/os/hal/src/hal_adc.c \
-$(CHIBIOS)/os/hal/src/hal_can.c \
-$(CHIBIOS)/os/hal/src/hal_dac.c \
-$(CHIBIOS)/os/hal/src/hal_ext.c \
-$(CHIBIOS)/os/hal/src/hal_gpt.c \
-$(CHIBIOS)/os/hal/src/hal_i2c.c \
-$(CHIBIOS)/os/hal/src/hal_i2s.c \
-$(CHIBIOS)/os/hal/src/hal_icu.c \
-$(CHIBIOS)/os/hal/src/hal_mac.c \
-$(CHIBIOS)/os/hal/src/hal_mmc_spi.c \
-$(CHIBIOS)/os/hal/src/hal_pal.c \
-$(CHIBIOS)/os/hal/src/hal_pwm.c \
-$(CHIBIOS)/os/hal/src/hal_rtc.c \
-$(CHIBIOS)/os/hal/src/hal_sdc.c \
-$(CHIBIOS)/os/hal/src/hal_serial.c \
-$(CHIBIOS)/os/hal/src/hal_serial_usb.c \
-$(CHIBIOS)/os/hal/src/hal_spi.c \
 $(CHIBIOS)/os/hal/src/hal_st.c \
+$(CHIBIOS)/os/hal/src/hal_pal.c \
+$(CHIBIOS)/os/hal/src/hal_i2c.c \
 $(CHIBIOS)/os/hal/src/hal_uart.c \
-$(CHIBIOS)/os/hal/src/hal_usb.c \
-$(CHIBIOS)/os/hal/src/hal_wdg.c \
 $(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/hal_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx/hal_ext_lld_isr.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3/hal_adc_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1/hal_can_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1/hal_dac_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/STM32L4xx/hal_lld.c \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1/stm32_dma.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1/hal_ext_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2/hal_pal_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2/hal_i2c_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/RTCv2/hal_rtc_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2/hal_spi_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_gpt_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_icu_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_pwm_lld.c \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/hal_st_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/hal_serial_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv3/hal_pal_lld.c \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2/hal_i2c_lld.c \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2/hal_uart_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1/hal_usb_lld.c \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1/hal_wdg_lld.c \
-${CHIBIOS}/os/hal/boards/ST_NUCLEO64_F302R8/board.c \
 ${CHIBIOS}/os/hal/osal/rt/osal.c \
 $(CHIBIOS)/os/rt/src/chsys.c \
 $(CHIBIOS)/os/rt/src/chdebug.c \
@@ -96,11 +65,12 @@ ${CHIBIOS}/test/rt/source/test/test_sequence_010.c \
 ${CHIBIOS}/test/rt/source/test/test_sequence_011.c \
 ${CHIBIOS}/test/rt/source/test/test_sequence_012.c \
 ../sc/OsWrapper/Os.c \
+../cfg/board/board.c \
 ../cfg/gen/Os_Cfg.c \
 ../cfg/gen/UartHndlr_Cfg.c \
 ../appl/ui/main.c \
 ../appl/hal/led/Led.c \
-../appl/hal/uart/UartHndlr.c \
+../appl/hal/uart/UartHndlr.c
 
 
 CXXSRCS := 
@@ -110,30 +80,21 @@ $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S \
 $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/chcoreasm_v7m.S
 
 LDSCRIPTS := \
-../sc/linker/STM32F303xE.ld
+../sc/linker/STM32L432xC.ld
 
 INCDIRS := \
 $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC \
-$(CHIBIOS)/os/common/startup/ARMCMx/devices/STM32F3xx \
+$(CHIBIOS)/os/common/startup/ARMCMx/devices/STM32L4xx \
 $(CHIBIOS)/os/common/ext/CMSIS/include \
-$(CHIBIOS)/os/common/ext/CMSIS/ST/STM32F3xx \
+$(CHIBIOS)/os/common/ext/CMSIS/ST/STM32L4xx \
 $(CHIBIOS)/os/hal/include \
 $(CHIBIOS)/os/hal/ports/common/ARMCMx \
-$(CHIBIOS)/os/hal/ports/STM32/STM32F3xx \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/ADCv3 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/CANv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/DACv1 \
+$(CHIBIOS)/os/hal/ports/STM32/STM32L4xx \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/DMAv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/EXTIv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv2 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2 \
-$(CHIBIOS)/os/hal/ports/STM3mi merge 2/LLD/RTCv2 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/SPIv2 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/GPIOv3 \
+$(CHIBIOS)/os/hal/ports/STM32/LLD/I2Cv2 \
 $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv2 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/USBv1 \
-$(CHIBIOS)/os/hal/ports/STM32/LLD/xWDGv1 \
-${CHIBIOS}/os/hal/boards/ST_NUCLEO_F302R8 \
 ${CHIBIOS}/os/hal/osal/rt \
 $(CHIBIOS)/os/rt/include \
 $(CHIBIOS)/os/common/oslib/include \
@@ -185,7 +146,7 @@ ABSCXXSRCS := $(call WIN_PATH,$(abspath $(CXXSRCS)))
 
 # Project relevant defines
 MCU := cortex-m4
-PROJNAME := stm32f302R8-nucleo
+PROJNAME := stm32l432kc-nucleo32
 
 PROJEXEC := 
 PROJMAP := 
